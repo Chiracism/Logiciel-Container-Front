@@ -14,6 +14,7 @@ import Categorie from './pages/categorie';
 import Client from './pages/client';
 import Countrie from './pages/countrie';
 import Devise from './pages/devise';
+import EtatConteneur from './pages/etat_conteneur';
 import Vessel from './pages/vessel';
 import Port from './pages/port';
 import Exportation from './pages/exportation/Exportation';
@@ -39,6 +40,7 @@ export default function Router() {
         { path: 'client', element: <Client /> },
         { path: 'Countrie', element: <Countrie /> },
         { path: 'Devise', element: <Devise /> },
+        { path: 'etat_conteneur', element: <EtatConteneur /> },
         { path: 'vessel', element: <Vessel /> },
         { path: 'port', element: <Port /> },
         { path: 'chargeur', element: <Chargeur /> },

@@ -29,10 +29,7 @@ import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import { UserListHead } from '../../components/_dashboard/user';
-import {
-  EtatConteneurListToolbar,
-  EtatConteneurMoreMenu
-} from '../../components/_dashboard/etat_conteneur';
+import { MaterielListToolbar, MaterielMoreMenu } from '../../components/_dashboard/materiel';
 
 // import { numberValidation } from '../../utils/validate';
 
@@ -91,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function EtatConteneur() {
+export default function Countrie() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -99,9 +96,9 @@ export default function EtatConteneur() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [etatconteneurTab, setEtatConteneurTab] = useState([]);
-  const [etatconteneurindexInput, setEtatConteneurIndexInput] = useState('');
-  const [etatconteneurnameInput, setEtatConteneurNameInput] = useState('');
+  const [countrieTab, setCountrieTab] = useState([]);
+  const [countrieindexInput, setCountrieIndexInput] = useState('');
+  const [countrienameInput, setCountrieNameInput] = useState('');
 
   const [dataChange, setDataChange] = useState(false);
 
@@ -110,25 +107,25 @@ export default function EtatConteneur() {
   const classes = useStyles();
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/etat_conteneur/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/countrie/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setEtatConteneurTab(value.data);
+        setCountrieTab(value.data);
       })
       .catch(() => {});
   }, []);
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/etat_conteneur/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/countrie/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setEtatConteneurTab(value.data);
+        setCountrieTab(value.data);
       })
       .catch(() => {});
   }, [dataChange]);
@@ -149,16 +146,12 @@ export default function EtatConteneur() {
     setOpenModal(false);
   };
 
-  const addEtatConteneur = (etatconteneurindexInput, etatconteneurnameInput) => {
-    if (
-      etatconteneurindexInput !== '' &&
-      etatconteneurindexInput !== null &&
-      etatconteneurnameInput !== ''
-    )
+  const addCountrie = (countrieindexInput, countrienameInput) => {
+    if (countrieindexInput !== '' && countrieindexInput !== null && countrienameInput !== '')
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/etat_conteneur/`,
-          { index: etatconteneurindexInput, name: etatconteneurnameInput },
+          `${process.env.REACT_APP_BASE_URL}/countrie/`,
+          { index: countrieindexInput, name: countrienameInput },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
@@ -169,12 +162,12 @@ export default function EtatConteneur() {
           isDataChange();
           handleClose();
 
-          setEtatConteneurIndexInput('');
-          setEtatConteneurNameInput('');
+          setCountrieIndexInput('');
+          setCountrieNameInput('');
         })
         .catch(() => {
-          setEtatConteneurIndexInput('');
-          setEtatConteneurNameInput('');
+          setCountrieIndexInput('');
+          setCountrieNameInput('');
         });
   };
 
@@ -186,7 +179,7 @@ export default function EtatConteneur() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = setEtatConteneurTab.map((n) => n.name);
+      const newSelecteds = setCountrieTab.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -224,30 +217,25 @@ export default function EtatConteneur() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setEtatConteneurTab.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setCountrieTab.length) : 0;
 
-  const filteredEtatConteneur = applySortFilter(
-    etatconteneurTab,
-    getComparator(order, orderBy),
-    filterName
-  );
+  const filteredCountrie = applySortFilter(countrieTab, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredEtatConteneur.length === 0;
+  const isUserNotFound = filteredCountrie.length === 0;
 
   return (
-    <Page title="Etat | LMC App">
+    <Page title="Countrie | LMC App">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Etat Conteneur
+            Pays
           </Typography>
           <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
             onClick={() => handleOpen()}
           >
-            Nouveau Etat Conteneur
+            Nouvel Pays
           </Button>
         </Stack>
 
@@ -259,23 +247,23 @@ export default function EtatConteneur() {
             onClose={handleClose}
           >
             <div className={classes.paper}>
-              <h2 id="simple-modal-title">Ajouter un Etat Conteneur</h2>
+              <h2 id="simple-modal-title">Ajouter un Pays</h2>
               <TextField
                 label="Saisissez l'Index"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={etatconteneurindexInput}
-                onChange={(e) => setEtatConteneurIndexInput(e.target.value)}
+                value={countrieindexInput}
+                onChange={(e) => setCountrieIndexInput(e.target.value)}
               />
               <TextField
                 label="Saisissez le Nom"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={etatconteneurnameInput}
-                onChange={(e) => setEtatConteneurNameInput(e.target.value)}
+                value={countrienameInput}
+                onChange={(e) => setCountrieNameInput(e.target.value)}
               />
               <Button
-                onClick={() => addEtatConteneur(etatconteneurindexInput, etatconteneurnameInput)}
+                onClick={() => addCountrie(countrieindexInput, countrienameInput)}
                 variant="contained"
                 startIcon={<Icon icon={plusFill} />}
               >
@@ -286,7 +274,7 @@ export default function EtatConteneur() {
         ) : null}
 
         <Card>
-          <EtatConteneurListToolbar
+          <CountrieListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -299,13 +287,13 @@ export default function EtatConteneur() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={setEtatConteneurTab.length}
+                  rowCount={setCountrieTab.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredEtatConteneur
+                  {filteredCountrie
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       const { id, index, name } = row;
@@ -342,8 +330,8 @@ export default function EtatConteneur() {
                           </TableCell>
 
                           <TableCell align="right">
-                            <EtatConteneurMoreMenu
-                              idEtatConteneur={id}
+                            <CountrieMoreMenu
+                              idCountrie={id}
                               sendInformation={(value) => isDataChange(value)}
                             />
                           </TableCell>
@@ -372,7 +360,7 @@ export default function EtatConteneur() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={setEtatConteneurTab.length}
+            count={setCountrieTab.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
