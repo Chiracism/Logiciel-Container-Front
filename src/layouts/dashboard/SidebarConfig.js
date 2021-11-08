@@ -9,6 +9,7 @@ import flagFill from '@iconify/icons-eva/flag-fill';
 import listFill from '@iconify/icons-eva/list-fill';
 
 import jwt from 'jsonwebtoken';
+import { AttachMoney, MoneyOff } from '@material-ui/icons';
 
 // ----------------------------------------------------------------------
 
@@ -93,6 +94,11 @@ export default function SidebarConfig() {
           icon: getIcon(flagFill)
         },
         {
+          title: 'Taux',
+          path: '/dashboard/rate',
+          icon: getIcon(AttachMoney)
+        },
+        {
           title: 'Chargeur',
           path: '/dashboard/chargeur',
           icon: getIcon(personFill)
@@ -169,6 +175,11 @@ export default function SidebarConfig() {
           title: 'Port',
           path: '/dashboard/port',
           icon: getIcon(flagFill)
+        },
+        {
+          title: 'Taux',
+          path: '/dashboard/rate',
+          icon: getIcon(AttachMoney)
         },
         {
           title: 'Chargeur',

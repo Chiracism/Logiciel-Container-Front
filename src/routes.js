@@ -17,6 +17,7 @@ import Devise from './pages/devise';
 import EtatConteneur from './pages/etat_conteneur';
 // import Vessel from './pages/vessel';
 import Port from './pages/port';
+import Rate from './pages/rate';
 import Exportation from './pages/exportation/Exportation';
 import Importation from './pages/importation/Importation';
 import Chargeur from './pages/chargeur';
@@ -49,6 +50,7 @@ export default function Router() {
         { path: 'owner', element: <Owner /> },
         // { path: 'vessel', element: <Vessel /> },
         { path: 'port', element: <Port /> },
+        { path: 'rate', element: <Rate /> },
         { path: 'chargeur', element: <Chargeur /> },
         { path: 'agence', element: <Agence /> },
         { path: 'historique', element: <Historic /> },
