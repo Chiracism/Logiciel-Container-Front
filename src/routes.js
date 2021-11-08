@@ -23,6 +23,8 @@ import Chargeur from './pages/chargeur';
 import Agence from './pages/agence';
 import NotFound from './pages/Page404';
 import Materiel from './pages/materiel';
+import Navire from './pages/navire';
+import Owner from './pages/owner';
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +45,8 @@ export default function Router() {
         { path: 'Devise', element: <Devise /> },
         { path: 'etat_conteneur', element: <EtatConteneur /> },
         { path: 'Materiel', element: <Materiel /> },
+        { path: 'Navire', element: <Navire /> },
+        { path: 'owner', element: <Owner /> },
         { path: 'vessel', element: <Vessel /> },
         { path: 'port', element: <Port /> },
         { path: 'chargeur', element: <Chargeur /> },

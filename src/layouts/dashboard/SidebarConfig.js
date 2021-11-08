@@ -73,6 +73,16 @@ export default function SidebarConfig() {
           icon: getIcon(compassFill)
         },
         {
+          title: 'Navire',
+          path: '/dashboard/navire',
+          icon: getIcon(compassFill)
+        },
+        {
+          title: 'Propriétaire',
+          path: '/dashboard/owner',
+          icon: getIcon(compassFill)
+        },
+        {
           title: 'Vessel',
           path: '/dashboard/vessel',
           icon: getIcon(compassFill)
@@ -138,6 +148,16 @@ export default function SidebarConfig() {
         {
           title: 'Materiel',
           path: '/dashboard/materiel',
+          icon: getIcon(compassFill)
+        },
+        {
+          title: 'Navire',
+          path: '/dashboard/navire',
+          icon: getIcon(compassFill)
+        },
+        {
+          title: 'Propriétaire',
+          path: '/dashboard/owner',
           icon: getIcon(compassFill)
         },
         {
