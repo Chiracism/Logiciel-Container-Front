@@ -82,11 +82,11 @@ export default function SidebarConfig() {
           path: '/dashboard/owner',
           icon: getIcon(compassFill)
         },
-        {
-          title: 'Vessel',
-          path: '/dashboard/vessel',
-          icon: getIcon(compassFill)
-        },
+        // {
+        //   title: 'Vessel',
+        //   path: '/dashboard/vessel',
+        //   icon: getIcon(compassFill)
+        // },
         {
           title: 'Port',
           path: '/dashboard/port',
@@ -160,11 +160,11 @@ export default function SidebarConfig() {
           path: '/dashboard/owner',
           icon: getIcon(compassFill)
         },
-        {
-          title: 'Vessel',
-          path: '/dashboard/vessel',
-          icon: getIcon(compassFill)
-        },
+        // {
+        //   title: 'Vessel',
+        //   path: '/dashboard/vessel',
+        //   icon: getIcon(compassFill)
+        // },
         {
           title: 'Port',
           path: '/dashboard/port',

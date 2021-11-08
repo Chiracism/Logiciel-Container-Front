@@ -15,7 +15,7 @@ import Client from './pages/client';
 import Countrie from './pages/countrie';
 import Devise from './pages/devise';
 import EtatConteneur from './pages/etat_conteneur';
-import Vessel from './pages/vessel';
+// import Vessel from './pages/vessel';
 import Port from './pages/port';
 import Exportation from './pages/exportation/Exportation';
 import Importation from './pages/importation/Importation';
@@ -47,7 +47,7 @@ export default function Router() {
         { path: 'Materiel', element: <Materiel /> },
         { path: 'Navire', element: <Navire /> },
         { path: 'owner', element: <Owner /> },
-        { path: 'vessel', element: <Vessel /> },
+        // { path: 'vessel', element: <Vessel /> },
         { path: 'port', element: <Port /> },
         { path: 'chargeur', element: <Chargeur /> },
         { path: 'agence', element: <Agence /> },

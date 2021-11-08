@@ -29,11 +29,15 @@ import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import { UserListHead } from '../../components/_dashboard/user';
-import { PolListToolbar, PolMoreMenu } from '../../components/_dashboard/port';
+import { PortListToolbar, PortMoreMenu } from '../../components/_dashboard/port';
 
 // ----------------------------------------------------------------------
 
-const TABLE_HEAD = [{ id: 'name', label: 'Name', alignRight: false }, { id: '' }];
+const TABLE_HEAD = [
+  { id: 'index', label: 'Index', alignRight: false },
+  { id: 'name', label: 'Name', alignRight: false },
+  { id: '' }
+];
 
 // ----------------------------------------------------------------------
 
@@ -91,7 +95,8 @@ export default function User() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [portTab, setPortTab] = useState([]);
-  const [portInput, setPortInput] = useState('');
+  const [portindexInput, setPortIndexInput] = useState('');
+  const [portnameInput, setPortNameInput] = useState('');
 
   const [dataChange, setDataChange] = useState(false);
 
@@ -100,7 +105,7 @@ export default function User() {
   const classes = useStyles();
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/pol/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/port/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
@@ -112,7 +117,7 @@ export default function User() {
   }, []);
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/pol/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/port/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
@@ -139,12 +144,17 @@ export default function User() {
     setOpenModal(false);
   };
 
-  const addPort = (portInput) => {
-    if (portInput !== '' && portInput !== null) {
+  const addPort = (portindexInput, portnameInput) => {
+    if (
+      portindexInput !== '' &&
+      portindexInput !== null &&
+      portnameInput !== '' &&
+      portnameInput !== null
+    )
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/pol/`,
-          { name: portInput },
+          `${process.env.REACT_APP_BASE_URL}/port/`,
+          { index: portindexInput, name: portnameInput },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
@@ -154,12 +164,13 @@ export default function User() {
         .then(() => {
           isDataChange();
           handleClose();
-          setPortInput('');
+          setPortIndexInput('');
+          setPortNameInput('');
         })
         .catch(() => {
-          setPortInput('');
+          setPortIndexInput('');
+          setPortNameInput('');
         });
-    }
   };
 
   const handleRequestSort = (event, property) => {
@@ -210,9 +221,9 @@ export default function User() {
 
   const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setPortTab.length) : 0;
 
-  const filteredPOL = applySortFilter(portTab, getComparator(order, orderBy), filterName);
+  const filteredPort = applySortFilter(portTab, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredPOL.length === 0;
+  const isUserNotFound = filteredPort.length === 0;
 
   return (
     <Page title="Port | LMC App">
@@ -240,14 +251,21 @@ export default function User() {
             <div className={classes.paper}>
               <h2 id="simple-modal-title">Création d'un port</h2>
               <TextField
-                label="Saisissez un nom du Port"
+                label="Saisissez l'index"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={portInput}
-                onChange={(e) => setPortInput(e.target.value)}
+                value={portindexInput}
+                onChange={(e) => setPortIndexInput(e.target.value)}
+              />
+              <TextField
+                label="Saisissez le nom du Port"
+                variant="outlined"
+                style={{ marginTop: 20, marginBottom: 20 }}
+                value={portnameInput}
+                onChange={(e) => setPortNameInput(e.target.value)}
               />
               <Button
-                onClick={() => addPort(portInput)}
+                onClick={() => addPort(portindexInput, portnameInput)}
                 variant="contained"
                 startIcon={<Icon icon={plusFill} />}
               >
@@ -258,7 +276,7 @@ export default function User() {
         ) : null}
 
         <Card>
-          <PolListToolbar
+          <PortListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -277,10 +295,10 @@ export default function User() {
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredPOL
+                  {filteredPort
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, name } = row;
+                      const { id, index, name } = row;
                       const isItemSelected = selected.indexOf(name) !== -1;
 
                       return (
@@ -301,13 +319,20 @@ export default function User() {
                           <TableCell component="th" scope="row" padding="none">
                             <Stack direction="row" alignItems="center" spacing={2}>
                               <Typography variant="subtitle2" noWrap>
+                                {index}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
+                          <TableCell component="th" scope="row" padding="none">
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                              <Typography variant="subtitle2" noWrap>
                                 {name}
                               </Typography>
                             </Stack>
                           </TableCell>
 
                           <TableCell align="right">
-                            <PolMoreMenu
+                            <PortMoreMenu
                               idVessel={id}
                               sendInformation={(value) => isDataChange(value)}
                             />

@@ -13,15 +13,15 @@ export default function UserMoreMenu({ idVessel, sendInformation }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
-  const deleteVessel = () => {
+  const deletePort = () => {
     axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/pol/${idVessel}`, {
+      .delete(`${process.env.REACT_APP_BASE_URL}/port/${idVessel}`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
         }
       })
       .then((value) => {
-        console.log('Delete POL success !');
+        console.log('Delete Port success !');
         sendInformation(value);
       })
       .catch(() => {});
@@ -43,7 +43,7 @@ export default function UserMoreMenu({ idVessel, sendInformation }) {
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
         transformOrigin={{ vertical: 'top', horizontal: 'right' }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }} onClick={() => deleteVessel()}>
+        <MenuItem sx={{ color: 'text.secondary' }} onClick={() => deletePort()}>
           <ListItemIcon>
             <Icon icon={trash2Outline} width={24} height={24} />
           </ListItemIcon>
