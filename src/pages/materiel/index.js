@@ -38,6 +38,7 @@ import { MaterielListToolbar, MaterielMoreMenu } from '../../components/_dashboa
 const TABLE_HEAD = [
   { id: 'index', label: 'Index', alignRight: false },
   { id: 'name', label: 'Name', alignRight: false },
+  { id: 'amount', label: 'Montant', alignRight: false },
   { id: '' }
 ];
 
@@ -88,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Countrie() {
+export default function Materiel() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -96,9 +97,10 @@ export default function Countrie() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [countrieTab, setCountrieTab] = useState([]);
-  const [countrieindexInput, setCountrieIndexInput] = useState('');
-  const [countrienameInput, setCountrieNameInput] = useState('');
+  const [materielTab, setMaterielTab] = useState([]);
+  const [materielindexInput, setMaterielIndexInput] = useState('');
+  const [materielnameInput, setMaterielNameInput] = useState('');
+  const [materielamountInput, setMaterielAmountInput] = useState('');
 
   const [dataChange, setDataChange] = useState(false);
 
@@ -107,25 +109,25 @@ export default function Countrie() {
   const classes = useStyles();
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/countrie/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/materiel/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setCountrieTab(value.data);
+        setMaterielTab(value.data);
       })
       .catch(() => {});
   }, []);
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/countrie/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/materiel/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setCountrieTab(value.data);
+        setMaterielTab(value.data);
       })
       .catch(() => {});
   }, [dataChange]);
@@ -146,12 +148,17 @@ export default function Countrie() {
     setOpenModal(false);
   };
 
-  const addCountrie = (countrieindexInput, countrienameInput) => {
-    if (countrieindexInput !== '' && countrieindexInput !== null && countrienameInput !== '')
+  const addMateriel = (materielindexInput, materielnameInput, materielamountInput) => {
+    if (
+      materielindexInput !== '' &&
+      materielindexInput !== null &&
+      materielnameInput !== '' &&
+      materielamountInput !== ''
+    )
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/countrie/`,
-          { index: countrieindexInput, name: countrienameInput },
+          `${process.env.REACT_APP_BASE_URL}/materiel/`,
+          { index: materielindexInput, name: materielnameInput, amount: materielamountInput },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
@@ -162,12 +169,14 @@ export default function Countrie() {
           isDataChange();
           handleClose();
 
-          setCountrieIndexInput('');
-          setCountrieNameInput('');
+          setMaterielIndexInput('');
+          setMaterielNameInput('');
+          setMaterielAmountInput('');
         })
         .catch(() => {
-          setCountrieIndexInput('');
-          setCountrieNameInput('');
+          setMaterielIndexInput('');
+          setMaterielNameInput('');
+          setMaterielAmountInput('');
         });
   };
 
@@ -179,7 +188,7 @@ export default function Countrie() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = setCountrieTab.map((n) => n.name);
+      const newSelecteds = setMaterielTab.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -217,25 +226,25 @@ export default function Countrie() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setCountrieTab.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setMaterielTab.length) : 0;
 
-  const filteredCountrie = applySortFilter(countrieTab, getComparator(order, orderBy), filterName);
+  const filteredMateriel = applySortFilter(materielTab, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredCountrie.length === 0;
+  const isUserNotFound = filteredMateriel.length === 0;
 
   return (
-    <Page title="Countrie | LMC App">
+    <Page title="Materiel | LMC App">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Pays
+            Materiel
           </Typography>
           <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
             onClick={() => handleOpen()}
           >
-            Nouvel Pays
+            Nouveau Materiel
           </Button>
         </Stack>
 
@@ -247,23 +256,32 @@ export default function Countrie() {
             onClose={handleClose}
           >
             <div className={classes.paper}>
-              <h2 id="simple-modal-title">Ajouter un Pays</h2>
+              <h2 id="simple-modal-title">Ajouter un Materiel</h2>
               <TextField
                 label="Saisissez l'Index"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={countrieindexInput}
-                onChange={(e) => setCountrieIndexInput(e.target.value)}
+                value={materielindexInput}
+                onChange={(e) => setMaterielIndexInput(e.target.value)}
               />
               <TextField
                 label="Saisissez le Nom"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={countrienameInput}
-                onChange={(e) => setCountrieNameInput(e.target.value)}
+                value={materielnameInput}
+                onChange={(e) => setMaterielNameInput(e.target.value)}
+              />
+              <TextField
+                label="Saisissez le Montant"
+                variant="outlined"
+                style={{ marginTop: 20, marginBottom: 20 }}
+                value={materielamountInput}
+                onChange={(e) => setMaterielAmountInput(e.target.value)}
               />
               <Button
-                onClick={() => addCountrie(countrieindexInput, countrienameInput)}
+                onClick={() =>
+                  addMateriel(materielindexInput, materielnameInput, materielamountInput)
+                }
                 variant="contained"
                 startIcon={<Icon icon={plusFill} />}
               >
@@ -274,7 +292,7 @@ export default function Countrie() {
         ) : null}
 
         <Card>
-          <CountrieListToolbar
+          <MaterielListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -287,16 +305,16 @@ export default function Countrie() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={setCountrieTab.length}
+                  rowCount={setMaterielTab.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredCountrie
+                  {filteredMateriel
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, index, name } = row;
+                      const { id, index, name, amount } = row;
                       const isItemSelected = selected.indexOf(name) !== -1;
 
                       return (
@@ -328,10 +346,17 @@ export default function Countrie() {
                               </Typography>
                             </Stack>
                           </TableCell>
+                          <TableCell component="th" scope="row" padding="none">
+                            <Stack direction="row" alignItems="center" spacing={2}>
+                              <Typography variant="subtitle2" noWrap>
+                                {amount}
+                              </Typography>
+                            </Stack>
+                          </TableCell>
 
                           <TableCell align="right">
-                            <CountrieMoreMenu
-                              idCountrie={id}
+                            <MaterielMoreMenu
+                              idMateriel={id}
                               sendInformation={(value) => isDataChange(value)}
                             />
                           </TableCell>
@@ -360,7 +385,7 @@ export default function Countrie() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={setCountrieTab.length}
+            count={setMaterielTab.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

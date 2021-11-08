@@ -22,6 +22,7 @@ import Importation from './pages/importation/Importation';
 import Chargeur from './pages/chargeur';
 import Agence from './pages/agence';
 import NotFound from './pages/Page404';
+import Materiel from './pages/materiel';
 
 // ----------------------------------------------------------------------
 
@@ -41,6 +42,7 @@ export default function Router() {
         { path: 'Countrie', element: <Countrie /> },
         { path: 'Devise', element: <Devise /> },
         { path: 'etat_conteneur', element: <EtatConteneur /> },
+        { path: 'Materiel', element: <Materiel /> },
         { path: 'vessel', element: <Vessel /> },
         { path: 'port', element: <Port /> },
         { path: 'chargeur', element: <Chargeur /> },

@@ -68,6 +68,11 @@ export default function SidebarConfig() {
           icon: getIcon(compassFill)
         },
         {
+          title: 'Materiel',
+          path: '/dashboard/materiel',
+          icon: getIcon(compassFill)
+        },
+        {
           title: 'Vessel',
           path: '/dashboard/vessel',
           icon: getIcon(compassFill)
@@ -128,6 +133,11 @@ export default function SidebarConfig() {
         {
           title: 'Etat de Conteneur',
           path: '/dashboard/etat_conteneur',
+          icon: getIcon(compassFill)
+        },
+        {
+          title: 'Materiel',
+          path: '/dashboard/materiel',
           icon: getIcon(compassFill)
         },
         {
