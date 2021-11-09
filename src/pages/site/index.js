@@ -23,13 +23,14 @@ import {
 // Modal Importations
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/styles';
+import { DatePicker } from '@material-ui/lab';
 
 // components
 import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import { UserListHead } from '../../components/_dashboard/user';
-import { DeviseListToolbar, DeviseMoreMenu } from '../../components/_dashboard/devise';
+import { SiteListToolbar, SiteMoreMenu } from '../../components/_dashboard/site';
 
 // import { numberValidation } from '../../utils/validate';
 
@@ -88,7 +89,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Devise() {
+export default function Site() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -96,9 +97,9 @@ export default function Devise() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [deviseTab, setDeviseTab] = useState([]);
-  const [deviseindexInput, setDeviseIndexInput] = useState('');
-  const [devisenameInput, setDeviseNameInput] = useState('');
+  const [siteTab, setSiteTab] = useState([]);
+  const [siteindexInput, setSiteIndexInput] = useState('');
+  const [sitenameInput, setSiteNameInput] = useState('');
 
   const [dataChange, setDataChange] = useState(false);
 
@@ -107,25 +108,25 @@ export default function Devise() {
   const classes = useStyles();
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/devise/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/site/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setDeviseTab(value.data);
+        setSiteTab(value.data);
       })
       .catch(() => {});
   }, []);
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/devise/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/site/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setDeviseTab(value.data);
+        setSiteTab(value.data);
       })
       .catch(() => {});
   }, [dataChange]);
@@ -146,12 +147,17 @@ export default function Devise() {
     setOpenModal(false);
   };
 
-  const addDevise = (deviseindexInput, devisenameInput) => {
-    if (deviseindexInput !== '' && deviseindexInput !== null && devisenameInput !== '')
+  const addRate = (siteindexInput, sitenameInput) => {
+    if (
+      siteindexInput !== '' &&
+      siteindexInput !== null &&
+      sitenameInput !== '' &&
+      sitenameInput !== null
+    )
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/devise/`,
-          { index: deviseindexInput, name: devisenameInput },
+          `${process.env.REACT_APP_BASE_URL}/site/`,
+          { index: siteindexInput, name: sitenameInput },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
@@ -162,12 +168,12 @@ export default function Devise() {
           isDataChange();
           handleClose();
 
-          setDeviseIndexInput('');
-          setDeviseNameInput('');
+          setSiteIndexInput('');
+          setSiteNameInput('');
         })
         .catch(() => {
-          setDeviseIndexInput('');
-          setDeviseNameInput('');
+          setSiteIndexInput('');
+          setSiteNameInput('');
         });
   };
 
@@ -179,7 +185,7 @@ export default function Devise() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = setDeviseTab.map((n) => n.name);
+      const newSelecteds = setSiteTab.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -217,25 +223,25 @@ export default function Devise() {
     setFilterName(event.target.value);
   };
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setDeviseTab.length) : 0;
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setSiteTab.length) : 0;
 
-  const filteredDevise = applySortFilter(deviseTab, getComparator(order, orderBy), filterName);
+  const filteredSite = applySortFilter(siteTab, getComparator(order, orderBy), filterName);
 
-  const isUserNotFound = filteredDevise.length === 0;
+  const isUserNotFound = filteredSite.length === 0;
 
   return (
-    <Page title="Devise | LMC App">
+    <Page title="Site | LMC App">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Devise
+            Site
           </Typography>
           <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
             onClick={() => handleOpen()}
           >
-            Nouvelle Devise
+            Nouveau Site
           </Button>
         </Stack>
 
@@ -247,23 +253,23 @@ export default function Devise() {
             onClose={handleClose}
           >
             <div className={classes.paper}>
-              <h2 id="simple-modal-title">Ajouter une Devise</h2>
+              <h2 id="simple-modal-title">Ajouter un Site</h2>
               <TextField
-                label="Saisissez l'Index"
+                label="Saisissez la date"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={deviseindexInput}
-                onChange={(e) => setDeviseIndexInput(e.target.value)}
+                value={siteindexInput}
+                onChange={(e) => setSiteIndexInput(e.target.value)}
               />
               <TextField
-                label="Saisissez le Nom"
+                label="Saisissez le Taux"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={devisenameInput}
-                onChange={(e) => setDeviseNameInput(e.target.value)}
+                value={sitenameInput}
+                onChange={(e) => setSiteNameInput(e.target.value)}
               />
               <Button
-                onClick={() => addDevise(deviseindexInput, devisenameInput)}
+                onClick={() => addRate(siteindexInput, sitenameInput)}
                 variant="contained"
                 startIcon={<Icon icon={plusFill} />}
               >
@@ -274,7 +280,7 @@ export default function Devise() {
         ) : null}
 
         <Card>
-          <DeviseListToolbar
+          <SiteListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -287,13 +293,13 @@ export default function Devise() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={setDeviseTab.length}
+                  rowCount={setSiteTab.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredDevise
+                  {filteredSite
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       const { id, index, name } = row;
@@ -330,8 +336,8 @@ export default function Devise() {
                           </TableCell>
 
                           <TableCell align="right">
-                            <DeviseMoreMenu
-                              idDevise={id}
+                            <SiteMoreMenu
+                              idSite={id}
                               sendInformation={(value) => isDataChange(value)}
                             />
                           </TableCell>
@@ -360,7 +366,7 @@ export default function Devise() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={setDeviseTab.length}
+            count={setSiteTab.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}

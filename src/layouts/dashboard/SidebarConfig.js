@@ -54,9 +54,9 @@ export default function SidebarConfig() {
           icon: getIcon(peopleFill)
         },
         {
-          title: 'countrie',
+          title: 'Pays',
           path: '/dashboard/countrie',
-          icon: getIcon(peopleFill)
+          icon: getIcon(flagFill)
         },
         {
           title: 'Devise',
@@ -81,7 +81,7 @@ export default function SidebarConfig() {
         {
           title: 'Propriétaire',
           path: '/dashboard/owner',
-          icon: getIcon(compassFill)
+          icon: getIcon(peopleFill)
         },
         // {
         //   title: 'Vessel',
@@ -94,35 +94,55 @@ export default function SidebarConfig() {
           icon: getIcon(flagFill)
         },
         {
+          title: 'Site',
+          path: '/dashboard/site',
+          icon: getIcon(flagFill)
+        },
+        {
+          title: 'Size',
+          path: '/dashboard/size',
+          icon: getIcon(flagFill)
+        },
+        {
+          title: 'Sous site',
+          path: '/dashboard/soussite',
+          icon: getIcon(flagFill)
+        },
+        {
           title: 'Taux',
           path: '/dashboard/rate',
-          icon: getIcon(AttachMoney)
+          icon: getIcon(flagFill)
         },
         {
-          title: 'Chargeur',
-          path: '/dashboard/chargeur',
-          icon: getIcon(personFill)
-        },
-        {
-          title: 'Agence',
-          path: '/dashboard/agence',
-          icon: getIcon(awardFill)
-        },
-        {
-          title: 'user',
-          path: '/dashboard/user',
-          icon: getIcon(peopleFill)
-        },
-        {
-          title: 'historique exportation',
-          path: '/dashboard/historique',
-          icon: getIcon(listFill)
-        },
-        {
-          title: 'historique importation',
-          path: '/dashboard/import-historique',
-          icon: getIcon(listFill)
+          title: 'Type',
+          path: '/dashboard/type',
+          icon: getIcon(flagFill)
         }
+        // {
+        //   title: 'Chargeur',
+        //   path: '/dashboard/chargeur',
+        //   icon: getIcon(personFill)
+        // },
+        // {
+        //   title: 'Agence',
+        //   path: '/dashboard/agence',
+        //   icon: getIcon(awardFill)
+        // },
+        // {
+        //   title: 'user',
+        //   path: '/dashboard/user',
+        //   icon: getIcon(peopleFill)
+        // },
+        // {
+        //   title: 'historique exportation',
+        //   path: '/dashboard/historique',
+        //   icon: getIcon(listFill)
+        // },
+        // {
+        //   title: 'historique importation',
+        //   path: '/dashboard/import-historique',
+        //   icon: getIcon(listFill)
+        // }
       ];
     } else if (user && user.role_id === 2) {
       sidebarConfig = [
@@ -137,7 +157,7 @@ export default function SidebarConfig() {
           icon: getIcon(fileTextFill)
         },
         {
-          title: 'countrie',
+          title: 'Pays',
           path: '/dashboard/countrie',
           icon: getIcon(peopleFill)
         },
@@ -177,20 +197,35 @@ export default function SidebarConfig() {
           icon: getIcon(flagFill)
         },
         {
+          title: 'Site',
+          path: '/dashboard/site',
+          icon: getIcon(flagFill)
+        },
+        {
+          title: 'Size',
+          path: '/dashboard/size',
+          icon: getIcon(flagFill)
+        },
+        {
           title: 'Taux',
           path: '/dashboard/rate',
           icon: getIcon(AttachMoney)
         },
         {
-          title: 'Chargeur',
-          path: '/dashboard/chargeur',
-          icon: getIcon(personFill)
-        },
-        {
-          title: 'Agence',
-          path: '/dashboard/agence',
-          icon: getIcon(awardFill)
+          title: 'Type',
+          path: '/dashboard/type',
+          icon: getIcon(flagFill)
         }
+        // {
+        //   title: 'Chargeur',
+        //   path: '/dashboard/chargeur',
+        //   icon: getIcon(personFill)
+        // },
+        // {
+        //   title: 'Agence',
+        //   path: '/dashboard/agence',
+        //   icon: getIcon(awardFill)
+        // }
       ];
     }
   } else {

@@ -335,7 +335,7 @@ export default function Agence() {
 
                           <TableCell align="right">
                             <CategorieMoreMenu
-                              idAgence={id}
+                              idCategorie={id}
                               sendInformation={(value) => isDataChange(value)}
                             />
                           </TableCell>

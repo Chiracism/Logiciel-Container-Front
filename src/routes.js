@@ -18,6 +18,10 @@ import EtatConteneur from './pages/etat_conteneur';
 // import Vessel from './pages/vessel';
 import Port from './pages/port';
 import Rate from './pages/rate';
+import Site from './pages/site';
+import Size from './pages/size';
+import Soussite from './pages/soussite';
+import Type from './pages/type';
 import Exportation from './pages/exportation/Exportation';
 import Importation from './pages/importation/Importation';
 import Chargeur from './pages/chargeur';
@@ -51,6 +55,10 @@ export default function Router() {
         // { path: 'vessel', element: <Vessel /> },
         { path: 'port', element: <Port /> },
         { path: 'rate', element: <Rate /> },
+        { path: 'site', element: <Site /> },
+        { path: 'size', element: <Size /> },
+        { path: 'soussite', element: <Soussite /> },
+        { path: 'type', element: <Type /> },
         { path: 'chargeur', element: <Chargeur /> },
         { path: 'agence', element: <Agence /> },
         { path: 'historique', element: <Historic /> },

@@ -29,7 +29,7 @@ import Page from '../../components/Page';
 import Scrollbar from '../../components/Scrollbar';
 import SearchNotFound from '../../components/SearchNotFound';
 import { UserListHead } from '../../components/_dashboard/user';
-import { DeviseListToolbar, DeviseMoreMenu } from '../../components/_dashboard/devise';
+import { SizeListToolbar, SizeMoreMenu } from '../../components/_dashboard/size';
 
 // import { numberValidation } from '../../utils/validate';
 
@@ -88,7 +88,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function Devise() {
+export default function Size() {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState('asc');
   const [selected, setSelected] = useState([]);
@@ -96,9 +96,9 @@ export default function Devise() {
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
-  const [deviseTab, setDeviseTab] = useState([]);
-  const [deviseindexInput, setDeviseIndexInput] = useState('');
-  const [devisenameInput, setDeviseNameInput] = useState('');
+  const [sizeTab, setSizeTab] = useState([]);
+  const [sizeindexInput, setSizeIndexInput] = useState('');
+  const [sizenameInput, setSizeNameInput] = useState('');
 
   const [dataChange, setDataChange] = useState(false);
 
@@ -107,25 +107,25 @@ export default function Devise() {
   const classes = useStyles();
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/devise/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/size/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setDeviseTab(value.data);
+        setSizeTab(value.data);
       })
       .catch(() => {});
   }, []);
 
   useEffect(() => {
-    axios(`${process.env.REACT_APP_BASE_URL}/devise/`, {
+    axios(`${process.env.REACT_APP_BASE_URL}/size/`, {
       headers: {
         Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
       }
     })
       .then((value) => {
-        setDeviseTab(value.data);
+        setSizeTab(value.data);
       })
       .catch(() => {});
   }, [dataChange]);
@@ -146,12 +146,17 @@ export default function Devise() {
     setOpenModal(false);
   };
 
-  const addDevise = (deviseindexInput, devisenameInput) => {
-    if (deviseindexInput !== '' && deviseindexInput !== null && devisenameInput !== '')
+  const addSize = (sizeindexInput, sizenameInput) => {
+    if (
+      sizeindexInput !== '' &&
+      sizeindexInput !== null &&
+      sizenameInput !== '' &&
+      sizenameInput !== null
+    )
       axios
         .post(
-          `${process.env.REACT_APP_BASE_URL}/devise/`,
-          { index: deviseindexInput, name: devisenameInput },
+          `${process.env.REACT_APP_BASE_URL}/size/`,
+          { index: sizeindexInput, name: sizenameInput },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
@@ -162,12 +167,12 @@ export default function Devise() {
           isDataChange();
           handleClose();
 
-          setDeviseIndexInput('');
-          setDeviseNameInput('');
+          setSizeIndexInput('');
+          setSizeNameInput('');
         })
         .catch(() => {
-          setDeviseIndexInput('');
-          setDeviseNameInput('');
+          setSizeIndexInput('');
+          setSizeNameInput('');
         });
   };
 
@@ -179,7 +184,7 @@ export default function Devise() {
 
   const handleSelectAllClick = (event) => {
     if (event.target.checked) {
-      const newSelecteds = setDeviseTab.map((n) => n.name);
+      const newSelecteds = setSizeTab.map((n) => n.name);
       setSelected(newSelecteds);
       return;
     }
@@ -216,26 +221,25 @@ export default function Devise() {
   const handleFilterByName = (event) => {
     setFilterName(event.target.value);
   };
+  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setSizeTab.length) : 0;
 
-  const emptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - setDeviseTab.length) : 0;
+  const filteredSize = applySortFilter(sizeTab, getComparator(order, orderBy), filterName);
 
-  const filteredDevise = applySortFilter(deviseTab, getComparator(order, orderBy), filterName);
-
-  const isUserNotFound = filteredDevise.length === 0;
+  const isUserNotFound = filteredSize.length === 0;
 
   return (
-    <Page title="Devise | LMC App">
+    <Page title="Size | LMC App">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            Devise
+            Taille
           </Typography>
           <Button
             variant="contained"
             startIcon={<Icon icon={plusFill} />}
             onClick={() => handleOpen()}
           >
-            Nouvelle Devise
+            Nouvelle Taille
           </Button>
         </Stack>
 
@@ -247,23 +251,23 @@ export default function Devise() {
             onClose={handleClose}
           >
             <div className={classes.paper}>
-              <h2 id="simple-modal-title">Ajouter une Devise</h2>
+              <h2 id="simple-modal-title">Ajouter une Taille</h2>
               <TextField
-                label="Saisissez l'Index"
+                label="Saisissez l'index"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={deviseindexInput}
-                onChange={(e) => setDeviseIndexInput(e.target.value)}
+                value={sizeindexInput}
+                onChange={(e) => setSizeIndexInput(e.target.value)}
               />
               <TextField
-                label="Saisissez le Nom"
+                label="Saisissez la Taille"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={devisenameInput}
-                onChange={(e) => setDeviseNameInput(e.target.value)}
+                value={sizenameInput}
+                onChange={(e) => setSizeNameInput(e.target.value)}
               />
               <Button
-                onClick={() => addDevise(deviseindexInput, devisenameInput)}
+                onClick={() => addSize(sizeindexInput, sizenameInput)}
                 variant="contained"
                 startIcon={<Icon icon={plusFill} />}
               >
@@ -274,7 +278,7 @@ export default function Devise() {
         ) : null}
 
         <Card>
-          <DeviseListToolbar
+          <SizeListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -287,13 +291,13 @@ export default function Devise() {
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
-                  rowCount={setDeviseTab.length}
+                  rowCount={setSizeTab.length}
                   numSelected={selected.length}
                   onRequestSort={handleRequestSort}
                   onSelectAllClick={handleSelectAllClick}
                 />
                 <TableBody>
-                  {filteredDevise
+                  {filteredSize
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       const { id, index, name } = row;
@@ -330,8 +334,8 @@ export default function Devise() {
                           </TableCell>
 
                           <TableCell align="right">
-                            <DeviseMoreMenu
-                              idDevise={id}
+                            <SizeMoreMenu
+                              idSize={id}
                               sendInformation={(value) => isDataChange(value)}
                             />
                           </TableCell>
@@ -360,7 +364,7 @@ export default function Devise() {
           <TablePagination
             rowsPerPageOptions={[5, 10, 25]}
             component="div"
-            count={setDeviseTab.length}
+            count={setSizeTab.length}
             rowsPerPage={rowsPerPage}
             page={page}
             onPageChange={handleChangePage}
