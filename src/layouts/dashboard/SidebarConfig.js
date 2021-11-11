@@ -33,9 +33,14 @@ export default function SidebarConfig() {
           path: '/dashboard/app',
           icon: getIcon(pieChart2Fill)
         },
+        // {
+        //   title: 'formulaire importation',
+        //   path: '/dashboard/importation',
+        //   icon: getIcon(fileTextFill)
+        // },
         {
-          title: 'formulaire importation',
-          path: '/dashboard/importation',
+          title: 'Master File',
+          path: '/dashboard/masterfile',
           icon: getIcon(fileTextFill)
         },
         {
@@ -150,6 +155,11 @@ export default function SidebarConfig() {
           title: 'dashboard',
           path: '/dashboard/app',
           icon: getIcon(pieChart2Fill)
+        },
+        {
+          title: 'Master File',
+          path: '/dashboard/masterfile',
+          icon: getIcon(fileTextFill)
         },
         {
           title: 'formulaire exportation',

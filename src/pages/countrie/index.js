@@ -235,7 +235,7 @@ export default function Countrie() {
             startIcon={<Icon icon={plusFill} />}
             onClick={() => handleOpen()}
           >
-            Nouvel Pays
+            Nouveau Pays
           </Button>
         </Stack>
 

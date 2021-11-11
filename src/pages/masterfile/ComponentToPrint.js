@@ -1,5 +1,5 @@
 import React from 'react';
-import './Importation.css';
+import './Masterfile.css';
 
 class ComponentToPrint extends React.PureComponent {
   constructor(props) {
@@ -47,7 +47,7 @@ class ComponentToPrint extends React.PureComponent {
           </div>
         </div>
         <h3 className="print-source" style={{ textAlign: 'center' }}>
-          FICHE DE CONTENEUR
+          NOTE DE DEBIT
         </h3>
         <p className="print-source" style={{ textAlign: 'right', margin: '2rem 1rem 3rem 0' }}>
           <strong>Client</strong> : <span>{client}</span>
@@ -95,7 +95,7 @@ class ComponentToPrint extends React.PureComponent {
             <strong>Montant Net</strong> : {total} FC
           </p>
           <p>
-            <strong>Date</strong> : {date}
+            <strong>Date</strong> : le {date}
           </p>
         </div>
         <div

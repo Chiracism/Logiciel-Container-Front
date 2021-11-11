@@ -8,6 +8,7 @@ import LogoOnlyLayout from './layouts/LogoOnlyLayout';
 import Login from './pages/Login';
 import DashboardApp from './pages/DashboardApp';
 import User from './pages/user/User';
+import MasterFile from './pages/masterfile/masterfile';
 import Historic from './pages/historic';
 import ImportationHistoric from './pages/historicImportation';
 import Categorie from './pages/categorie';
@@ -42,6 +43,7 @@ export default function Router() {
         { path: '/', element: <Navigate to="/dashboard/app" replace /> },
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
+        { path: 'masterfile', element: <MasterFile /> },
         { path: 'importation', element: <Importation /> },
         { path: 'exportation', element: <Exportation /> },
         { path: 'categorie', element: <Categorie /> },

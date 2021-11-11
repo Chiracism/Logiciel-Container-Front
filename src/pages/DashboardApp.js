@@ -11,7 +11,7 @@ export default function DashboardApp() {
     <Page title="Dashboard | LMC App">
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
-          <Typography variant="h4">Bienvenu !</Typography>
+          <Typography variant="h4">Dashboard</Typography>
         </Box>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6} md={3}>
