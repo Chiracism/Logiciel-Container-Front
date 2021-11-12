@@ -44,6 +44,11 @@ export default function SidebarConfig() {
           icon: getIcon(fileTextFill)
         },
         {
+          title: 'Mouvement',
+          path: '/dashboard/mouvement',
+          icon: getIcon(fileTextFill)
+        },
+        {
           title: 'formulaire exportation',
           path: '/dashboard/exportation',
           icon: getIcon(fileTextFill)
@@ -159,6 +164,11 @@ export default function SidebarConfig() {
         {
           title: 'Master File',
           path: '/dashboard/masterfile',
+          icon: getIcon(fileTextFill)
+        },
+        {
+          title: 'Mouvement',
+          path: '/dashboard/mouvement',
           icon: getIcon(fileTextFill)
         },
         {

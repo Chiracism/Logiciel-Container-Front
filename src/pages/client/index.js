@@ -39,8 +39,8 @@ const TABLE_HEAD = [
   { id: 'numero', label: 'Numero', alignRight: false },
   { id: 'name', label: 'Name', alignRight: false },
   { id: 'impot', label: 'Numero Impot', alignRight: false },
-  { id: 'idnat', label: 'Id. Nationale', alignRight: false },
-  { id: 'activity', label: 'Activite', alignRight: false },
+  // { id: 'idnat', label: 'Id. Nationale', alignRight: false },
+  // { id: 'activity', label: 'Activite', alignRight: false },
   { id: 'address', label: 'Adresse', alignRight: false },
   { id: 'phone', label: 'Phone', alignRight: false },
   { id: 'email', label: 'email', alignRight: false },
@@ -103,14 +103,14 @@ export default function User() {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [clientTab, setClientTab] = useState([]);
-  const [numero, setNumero] = useState('');
-  const [name, setName] = useState('');
-  const [impot, setImpot] = useState('');
-  const [idnat, setIdNat] = useState('');
-  const [activity, setActivity] = useState('');
-  const [address, setAddress] = useState('');
-  const [phone, setPhone] = useState('');
-  const [email, setEmail] = useState('');
+  const [clientnumero, setClientNumero] = useState('');
+  const [clientname, setClientName] = useState('');
+  const [clientimpot, setClientImpot] = useState('');
+  // const [clientidnat, setClientIdNat] = useState('');
+  // const [clientactivity, setClientActivity] = useState('');
+  const [clientaddress, setClientAddress] = useState('');
+  const [clientphone, setClientPhone] = useState('');
+  const [clientemail, setClientEmail] = useState('');
 
   const [dataChange, setDataChange] = useState(false);
 
@@ -158,20 +158,29 @@ export default function User() {
     setOpenModal(false);
   };
 
-  const addClient = (numero, name, impot, idnat, activity, address, phone, email) => {
-    if (name !== '' && name !== null) {
+  const addClient = (
+    clientnumero,
+    clientname,
+    clientimpot,
+    // clientidnat,
+    // clientactivity,
+    clientaddress,
+    clientphone,
+    clientemail
+  ) => {
+    if (clientname !== '' && clientname !== null && clientnumero !== '' && clientnumero !== null) {
       axios
         .post(
           `${process.env.REACT_APP_BASE_URL}/client/`,
           {
-            numero,
-            name,
-            impot,
-            idnat,
-            activity,
-            address,
-            phone,
-            email
+            numero: clientnumero,
+            name: clientname,
+            impot: clientimpot,
+            // idnat: clientidnat,
+            // activity: clientactivity,
+            address: clientaddress,
+            phone: clientphone,
+            email: clientemail
           },
           {
             headers: {
@@ -183,24 +192,24 @@ export default function User() {
           isDataChange();
           handleClose();
 
-          setNumero('');
-          setName('');
-          setImpot('');
-          setIdNat('');
-          setActivity('');
-          setAddress('');
-          setPhone('');
-          setEmail('');
+          setClientNumero('');
+          setClientName('');
+          setClientImpot('');
+          // setClientIdNat('');
+          // setClientActivity('');
+          setClientAddress('');
+          setClientPhone('');
+          setClientEmail('');
         })
         .catch(() => {
-          setNumero('');
-          setName('');
-          setImpot('');
-          setIdNat('');
-          setActivity('');
-          setAddress('');
-          setPhone('');
-          setEmail('');
+          setClientNumero('');
+          setClientName('');
+          setClientImpot('');
+          // setClientIdNat('');
+          // setClientActivity('');
+          setClientAddress('');
+          setClientPhone('');
+          setClientEmail('');
         });
     }
   };
@@ -286,57 +295,57 @@ export default function User() {
                 label="Saisissez le numero du client"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={numero}
-                onChange={(e) => setNumero(e.target.value)}
+                value={clientnumero}
+                onChange={(e) => setClientNumero(e.target.value)}
               />
               <TextField
                 label="Saisissez le nom du client"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={clientname}
+                onChange={(e) => setClientName(e.target.value)}
               />
               <TextField
                 label="Saisissez le numero Impot"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={impot}
-                onChange={(e) => setImpot(e.target.value)}
+                value={clientimpot}
+                onChange={(e) => setClientImpot(e.target.value)}
               />
-              <TextField
+              {/* <TextField
                 label="Saisissez le numero Id. Nat."
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={idnat}
-                onChange={(e) => setIdNat(e.target.value)}
+                value={clientidnat}
+                onChange={(e) => setClientIdNat(e.target.value)}
               />
               <TextField
                 label="Saisissez l'activite du client"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={activity}
-                onChange={(e) => setActivity(e.target.value)}
-              />
+                value={clientactivity}
+                onChange={(e) => setClientActivity(e.target.value)}
+              /> */}
               <TextField
                 label="Saisissez l'adresse du client"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={address}
-                onChange={(e) => setAddress(e.target.value)}
+                value={clientaddress}
+                onChange={(e) => setClientAddress(e.target.value)}
               />
               <TextField
                 label="Saisissez le numero telephone"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                value={clientphone}
+                onChange={(e) => setClientPhone(e.target.value)}
               />
               <TextField
                 label="Saisissez l'E-mail du Client"
                 variant="outlined"
                 style={{ marginTop: 20, marginBottom: 20 }}
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                value={clientemail}
+                onChange={(e) => setClientEmail(e.target.value)}
               />
               {/* <TextField
                 label="Saisissez l'E-mail du Client"
@@ -356,7 +365,16 @@ export default function User() {
                 onChange={(e) => setCommission(e.target.value)}
               /> */}
               <Button
-                onClick={() => addClient()}
+                onClick={() =>
+                  addClient(
+                    clientnumero,
+                    clientname,
+                    clientimpot,
+                    clientaddress,
+                    clientphone,
+                    clientemail
+                  )
+                }
                 variant="contained"
                 startIcon={<Icon icon={plusFill} />}
               >
@@ -390,8 +408,7 @@ export default function User() {
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
                       console.log('Row : ', row);
-                      const { id, numero, name, impot, idnat, activity, address, phone, email } =
-                        row;
+                      const { id, numero, name, impot, address, phone, email } = row;
                       // const extraFacture = row.extra_fac;
                       const isItemSelected = selected.indexOf(name) !== -1;
 
@@ -431,7 +448,7 @@ export default function User() {
                               </Typography>
                             </Stack>
                           </TableCell>
-                          <TableCell component="th" scope="row" padding="none">
+                          {/* <TableCell component="th" scope="row" padding="none">
                             <Stack direction="row" alignItems="center" spacing={2}>
                               <Typography variant="subtitle2" noWrap>
                                 {idnat}
@@ -444,7 +461,7 @@ export default function User() {
                                 {activity}
                               </Typography>
                             </Stack>
-                          </TableCell>
+                          </TableCell> */}
                           <TableCell component="th" scope="row" padding="none">
                             <Stack direction="row" alignItems="center" spacing={2}>
                               <Typography variant="subtitle2" noWrap>

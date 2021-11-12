@@ -9,13 +9,13 @@ import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@materia
 
 // ----------------------------------------------------------------------
 
-export default function UserMoreMenu({ idVessel, sendInformation }) {
+export default function UserMoreMenu({ idClient, sendInformation }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
   const deleteClient = () => {
     axios
-      .delete(`${process.env.REACT_APP_BASE_URL}/client/${idVessel}`, {
+      .delete(`${process.env.REACT_APP_BASE_URL}/client/${idClient}`, {
         headers: {
           Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
         }

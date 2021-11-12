@@ -53,6 +53,10 @@ export default function Masterfile() {
   const [mastermontant, setMasterMontant] = useState('');
   const [masternumero, setMasterNumero] = useState('');
 
+  const reloadPage = () => {
+    window.location.reload();
+  };
+
   function disabledPrint() {
     if (navirenameInput !== '' && navirenameInput !== null) return false;
     return true;
@@ -357,6 +361,11 @@ export default function Masterfile() {
           <Typography variant="h4" gutterBottom>
             MasterFile
           </Typography>
+          <Box>
+            <Button variant="contained" color="primary" onClick={() => reloadPage()}>
+              Rafraîchir
+            </Button>
+          </Box>
         </Stack>
 
         <CheckUserAuth />

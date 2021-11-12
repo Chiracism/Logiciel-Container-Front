@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import DashboardApp from './pages/DashboardApp';
 import User from './pages/user/User';
 import MasterFile from './pages/masterfile/masterfile';
+import Mouvement from './pages/mouvement/mouvement';
 import Historic from './pages/historic';
 import ImportationHistoric from './pages/historicImportation';
 import Categorie from './pages/categorie';
@@ -44,6 +45,7 @@ export default function Router() {
         { path: 'app', element: <DashboardApp /> },
         { path: 'user', element: <User /> },
         { path: 'masterfile', element: <MasterFile /> },
+        { path: 'mouvement', element: <Mouvement /> },
         { path: 'importation', element: <Importation /> },
         { path: 'exportation', element: <Exportation /> },
         { path: 'categorie', element: <Categorie /> },
