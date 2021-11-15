@@ -58,9 +58,14 @@ export default function SidebarConfig() {
         //   path: '/dashboard/importation',
         //   icon: getIcon(fileTextFill)
         // },
+        // {
+        //   title: 'formulaire exportation',
+        //   path: '/dashboard/exportation',
+        //   icon: getIcon(fileTextFill)
+        // },
         {
-          title: 'formulaire exportation',
-          path: '/dashboard/exportation',
+          title: 'Surestarie',
+          path: '/dashboard/surestarie',
           icon: getIcon(fileTextFill)
         },
         {

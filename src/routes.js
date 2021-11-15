@@ -11,6 +11,7 @@ import User from './pages/user/User';
 import MasterFile from './pages/masterfile/masterfile';
 import Mouvement from './pages/mouvement/mouvement';
 import Reparation from './pages/reparation/reparation';
+import Surestarie from './pages/surestarie/surestarie';
 import Historic from './pages/historic';
 import ImportationHistoric from './pages/historicImportation';
 import Categorie from './pages/categorie';
@@ -48,6 +49,7 @@ export default function Router() {
         { path: 'masterfile', element: <MasterFile /> },
         { path: 'mouvement', element: <Mouvement /> },
         { path: 'reparation', element: <Reparation /> },
+        { path: 'surestarie', element: <Surestarie /> },
         { path: 'importation', element: <Importation /> },
         { path: 'exportation', element: <Exportation /> },
         { path: 'categorie', element: <Categorie /> },
