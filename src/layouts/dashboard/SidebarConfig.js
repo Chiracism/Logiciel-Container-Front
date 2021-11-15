@@ -53,6 +53,11 @@ export default function SidebarConfig() {
           path: '/dashboard/reparation',
           icon: getIcon(fileTextFill)
         },
+        // {
+        //   title: 'formulaire importation',
+        //   path: '/dashboard/importation',
+        //   icon: getIcon(fileTextFill)
+        // },
         {
           title: 'formulaire exportation',
           path: '/dashboard/exportation',

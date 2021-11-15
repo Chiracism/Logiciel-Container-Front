@@ -34,7 +34,7 @@ export default function Reparation() {
   const [reparadatereparaInput, setReparaDateReparaInput] = useState('');
   const [reparaheureInput, setReparaHeureInput] = useState(0);
   // const [reparamaterielInput, setReparaMaterielInput] = useState('');
-  const [reparatotalInput, setReparaTotalInput] = useState(0);
+  const [reparatotal, setReparaTotal] = useState(0);
   const [repararecuInput, setReparaRecuInput] = useState('');
   const [reparasocrepInput, setReparaSocRepInput] = useState('');
   const [reparasoclocInput, setReparaSocLocInput] = useState('');
@@ -66,7 +66,7 @@ export default function Reparation() {
           taux: reparatauxInput,
           heure: reparaheureInput,
           materiel_id: reparamaterielInput,
-          total: reparatotalInput,
+          total: reparatotal,
           numero_recu: repararecuInput,
           societe_reparation: reparasocrepInput,
           societe_location: reparasoclocInput,
@@ -197,6 +197,13 @@ export default function Reparation() {
       })
       .catch(() => {});
   }, []);
+
+  useEffect(() => {
+    setReparaTotal(reparatauxInput * reparaheureInput);
+  }, [reparatauxInput, reparaheureInput]);
+
+  const [reparataux, setReparaTaux] = useState(0);
+  const [reparaheure, setReparaHeure] = useState(0);
 
   /**
    * Informations for Materiel
@@ -507,10 +514,10 @@ export default function Reparation() {
                 className="basic-input"
                 label="Saisissez la date de r"
                 variant="outlined"
-                value={reparatotalInput}
-                onChange={(e) => {
-                  setReparaTotalInput(e.target.value);
-                }}
+                value={reparatotal}
+                // onChange={(e) => {
+                //   setReparaTotalInput(e.target.value);
+                // }}
               />
             </div>
 
