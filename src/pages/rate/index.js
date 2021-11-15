@@ -157,7 +157,7 @@ export default function Rate() {
       axios
         .post(
           `${process.env.REACT_APP_BASE_URL}/rate/`,
-          { rate_date: ratedateInput, amount: rateamountInput },
+          { ratedate: ratedateInput, amount: rateamountInput },
           {
             headers: {
               Authorization: `Bearer ${process.env.REACT_APP_TOKEN}`
@@ -302,8 +302,8 @@ export default function Rate() {
                   {filteredRate
                     .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                     .map((row) => {
-                      const { id, rate, amount } = row;
-                      const isItemSelected = selected.indexOf(rate) !== -1;
+                      const { id, ratedate, amount } = row;
+                      const isItemSelected = selected.indexOf(ratedate) !== -1;
 
                       return (
                         <TableRow
@@ -317,13 +317,13 @@ export default function Rate() {
                           <TableCell padding="checkbox">
                             <Checkbox
                               checked={isItemSelected}
-                              onChange={(event) => handleClick(event, rate)}
+                              onChange={(event) => handleClick(event, ratedate)}
                             />
                           </TableCell>
                           <TableCell component="th" scope="row" padding="none">
                             <Stack direction="row" alignItems="center" spacing={2}>
                               <Typography variant="subtitle2" noWrap>
-                                {rate}
+                                {ratedate}
                               </Typography>
                             </Stack>
                           </TableCell>

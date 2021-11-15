@@ -59,7 +59,7 @@ export default function PodStats() {
       </IconWrapperStyle>
       <Typography variant="h3">{fShortenNumber(podNumb)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Agences
+        X
       </Typography>
     </RootStyle>
   );

@@ -49,6 +49,11 @@ export default function SidebarConfig() {
           icon: getIcon(fileTextFill)
         },
         {
+          title: 'Réparation',
+          path: '/dashboard/reparation',
+          icon: getIcon(fileTextFill)
+        },
+        {
           title: 'formulaire exportation',
           path: '/dashboard/exportation',
           icon: getIcon(fileTextFill)
@@ -109,13 +114,13 @@ export default function SidebarConfig() {
           icon: getIcon(flagFill)
         },
         {
-          title: 'Size',
-          path: '/dashboard/size',
+          title: 'Sous site',
+          path: '/dashboard/soussite',
           icon: getIcon(flagFill)
         },
         {
-          title: 'Sous site',
-          path: '/dashboard/soussite',
+          title: 'Taille',
+          path: '/dashboard/size',
           icon: getIcon(flagFill)
         },
         {
@@ -172,6 +177,11 @@ export default function SidebarConfig() {
           icon: getIcon(fileTextFill)
         },
         {
+          title: 'Réparation',
+          path: '/dashboard/reparation',
+          icon: getIcon(fileTextFill)
+        },
+        {
           title: 'formulaire exportation',
           path: '/dashboard/exportation',
           icon: getIcon(fileTextFill)
@@ -222,7 +232,7 @@ export default function SidebarConfig() {
           icon: getIcon(flagFill)
         },
         {
-          title: 'Size',
+          title: 'Taille',
           path: '/dashboard/size',
           icon: getIcon(flagFill)
         },

@@ -42,7 +42,8 @@ export default function Login() {
       <MHidden width="mdDown">
         <SectionStyle style={{ flexDirection: 'column', alignItems: 'center' }}>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Bienvenue à Lignes Maritimes Congolaises
+            {/* Bienvenue à Lignes Maritimes Congolaises */}
+            Logiciel de Conteneur
           </Typography>
           <img src="/static/logo_lmc.JPG" alt="login" style={{ width: 200 }} />
         </SectionStyle>
